@@ -580,7 +580,18 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             else:
                 return 'c' #otherwise collude
     
-    
+    elif player == 20:
+        if getting_team_name:
+            return 'oppertunistic'
+        else:
+            if len(opponent_history)==0:
+                return 'c'
+            elif len(opponent_history)>=3:
+                if opponent_history[-1]=='c' and opponent_history[-2]=='c' and opponent_history[-3]=='c':
+                    return 'b'
+            else: 
+                return 'c'
+            
 
 
 
