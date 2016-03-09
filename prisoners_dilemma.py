@@ -584,12 +584,40 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
         if getting_team_name:
             return 'oppertunistic'
         else:
-            if len(opponent_history)==0:
+            if len(opponent_history)==0: #It's the first round, collude
                 return 'c'
-            elif len(opponent_history)>=3:
+            elif len(opponent_history)>=3: 
                 if opponent_history[-1]=='c' and opponent_history[-2]=='c' and opponent_history[-3]=='c':
-                    return 'b'
+                    return 'b' #betray if the opponent colluded three times in a row
             else: 
+                return 'c' #otherwise collude
+    elif player == 21:
+        if getting_team_name:
+            return 'Same Kepros'
+        else:
+            if len(opponent_history) ==0: #first round
+                return 'b'
+            elif random.random()<0.11: #11% of the other rounds
+                return 'c'         #collude
+            else:
+                return 'b'         #otherwise betray
+    
+    elif player == 22:
+        if getting_team_name:
+            return 'short fuse'
+        else:
+            if len(opponent_history)==0: #first round
+                return 'c'
+            elif len(opponent_history)>=3: 
+                b = 0 #number of times betrayed
+                for item in opponent_history:
+                    if item == 'b': #checks number of time betrayed
+                        b += 1 
+                if b >= 3:  #if betrayed 3 or more times, betray
+                    return 'b'
+            elif history[-1]=='c' and opponent_history[-1]=='b':
+                return 'b' # betray if they were severely punished last time 
+            else:
                 return 'c'
             
 
