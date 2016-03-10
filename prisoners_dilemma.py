@@ -381,7 +381,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                 return 'c' #otherwise collude
     elif player == 11:
         if getting_team_name:
-            return 'Same Kepros'
+            return 'Sam Kepros'
         else:
             if len(opponent_history) ==0: #first round
                 return 'b'
